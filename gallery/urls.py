@@ -6,7 +6,7 @@ from .views import (
     product_details
 )
 
-app_name = 'gallery'
+app_name = 'gallery_app'
 urlpatterns = [
     path('', index, name='index'),
     path('add_product/', upload_product, name='upload_product'),
