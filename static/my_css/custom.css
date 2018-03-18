@@ -1,0 +1,97 @@
+body {
+    background-color: #c7d2fc !important;
+}
+
+.nav-title {
+    font-family: 'Lobster', sans-serif;
+    font-size: 25px;
+}
+
+.prod_title {
+    font-family: 'Lobster', sans-serif;
+    color: #2d48ad;
+}
+
+.custom_div {
+    background-color: #ffffff;
+    margin-top: 56px;
+    min-height: 600px;
+}
+
+.custom_card {
+    bottom-margin: 200px !important;
+}
+
+.custom_box {
+    position: relative;
+    overflow: hidden;
+}
+
+.custom_box:hover .description {
+    margin-bottom: 0;
+}
+
+.description {
+    background: #545456;
+    text-align: center;
+    height: 50px;
+    line-height: 40px;
+    font-size: 16px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin-bottom: -100px;
+    transition: margin 0.3s ease-in-out;
+    -moz-transition: margin 0.3s ease-in-out;
+    -webkit-transition: margin 0.3s ease-in-out;
+    -o-transition: margin 0.3s ease-in-out;
+
+    opacity: 0.75;
+    filter: alpha(opacity=75); /* For IE8 and earlier */
+}
+
+
+.social-fonts {
+    font-size: 35px;
+}
+
+p {
+    font-family: Arial, "Times New Roman", Times, serif;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+
+#email-link a:link{
+    color:#FFFFFF;
+}
+
+
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+hr.style2 {
+	border-top: 2px double #ffffff;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+.footer {
+    background-color: #0B237B !important;
+    color: #ffffff;
+    left: 0;
+    width: 100%;
+}

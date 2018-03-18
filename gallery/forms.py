@@ -1,0 +1,15 @@
+from django import forms
+
+from .models import Gallery
+
+class UploadFileForm(forms.ModelForm):
+    '''
+    set the field attributes first before setting up the field's arrangement using the class Meta
+    '''
+    name = forms.CharField(label="Product Name")
+    description = forms.CharField(label="Details", widget=forms.Textarea)
+    image_location = forms.ImageField(label="Upload Photo")
+
+    class Meta:
+        model = Gallery
+        fields = ['name', 'description', 'image_location']

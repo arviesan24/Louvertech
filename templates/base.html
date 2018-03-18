@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!--Coded and designed by Romel Santoral-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!--Font Awesome-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+    <!--Lobster Font-->
+     <link href="https://fonts.googleapis.com/css?family=Lato|Raleway|Lobster" rel="stylesheet">
+
+    <!-- Local CSS files -->
+    <link rel="stylesheet" href="{% static 'my_css/custom.css' %}" />
+
+    <title>{% block title %}{% endblock title %}Louvertech</title>
+
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #0B237B;">
+    <a class="navbar-brand nav-title" href="{% url 'gallery:index' %}">Louvertech</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
+            <!--<li class="nav-item active">
+                <a class="nav-link" href="{% url 'gallery:index' %}">Home<span class="sr-only">(current)</span></a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact_us_app:contact_us' %}">Contact Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'gallery:upload_product' %}">Add Product</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'contact_us_app:all_inquiries' %}">Messages</a>
+            </li>
+            <div class="dropdown-divider"></div>
+            <li>
+                <a class="nav-link" href="{% url 'admin:login' %}">Admin</a>
+            </li>
+        </ul>
+        {% block search_form %}
+        {% endblock search_form %}
+    </div>
+</nav>
+
+
+<div class="custom_div container pt-3 pb-3">
+{% block page_links %}
+{% endblock page_links %}
+
+{% block content %}
+{% endblock content %}
+</div>
+
+
+<div class="footer pb-2">
+    <div class="row pt-3 mx-2">
+        <div class="col-sm-5">
+            <h5>Socials</h5>
+            <a target="_blank" href="https://web.facebook.com/louvertechph/" class="btn btn-outline-primary"><i class="fa fa-facebook fa-2 social-fonts"></i></a>
+            <a target="_blank" href="https://twitter.com/louvertech" class="btn btn-outline-primary"><i class="fa fa-twitter fa-2 social-fonts"></i></a>
+            <a target="_blank" href="https://www.instagram.com/louvertech_phil/" class="btn btn-outline-primary"><i class="fa fa-instagram fa-2 social-fonts"></i></a>
+            <h5 class="pt-2">Email us</h5>
+            <p id="email-link"><i class="fa fa-envelope"></i> <a href="mailto:louvertechphilippinesinc@gmail.com">louvertechphilippinesinc@gmail.com</a></p>
+        </div>
+        <div class="col-sm-7">
+            <h5>Visit our store</h5>
+            <p><i class="fa fa-map-marker"></i> CW Home Depot Ground Floor Tenant
+1240 Edsa Apolonio Samson Balintawak Quezon City</p>
+            <p><i class="fa fa-clock-o"></i> 9:00 AM to 8:00 PM, 7 days a week</p>
+            <p><i class="fa fa-phone"></i> 281-6574</p>
+
+        </div>
+    </div>
+
+    <hr class="style2">
+    <p style="text-align: center;">© 2018 Louvertech PH, All rights reserved. </p>
+</div>
+
+<!--JS, Popper.js, and jQuery-->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

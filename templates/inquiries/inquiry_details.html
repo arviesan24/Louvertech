@@ -1,0 +1,54 @@
+{% extends "../base.html" %}
+{% load widget_tweaks %}
+<title>{% block title %} Inquiry Details - {% endblock title %}</title>
+
+{% block content %}
+<table class="table table-responsive">
+    <tbody>
+    <tr>
+        <th scope="row"><b>From: </b></th>
+        <td><p>{{ message_body.cust_name }}</p></td>
+    </tr>
+
+    <tr>
+        <th scope="row"><b>Email: </b></th>
+        <td><p>{{ message_body.cust_email_address }}</p></td>
+    </tr>
+
+    <tr>
+        <th scope="row"><b>Contact Number: </b></th>
+        <td><p>{{ message_body.cust_contact_number }}</p></td>
+    </tr>
+
+    <tr>
+        <th scope="row"><b>Date Sent: </b></th>
+        <td><p>{{ message_body.timestamp }}</p></td>
+    </tr>
+
+    <tr>
+        <th scope="row"><b>Installation Location: </b></th>
+        <td><p>{{ message_body.cust_location }}</p></td>
+    </tr>
+
+    <tr>
+        <th scope="row"><b>Inquiry: </b></th>
+        <td><p>{{ message_body.cust_inquiry }}</p></td>
+    </tr>
+
+    <tr>
+        <!--<form method="post" action="" class="mb-3">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Mark as Read</button>
+        </form>-->
+        {% if message_body.marked_read %}
+            <div class="alert alert-info" role="alert">
+                <strong>Note: </strong>This message was already read.
+            </div>
+        {% else %}
+            <td><a href="{% url 'contact_us_app:mark_as_read' %}" class="btn btn-outline-primary">Mark as Read</a></td>
+        {% endif %}
+    </tr>
+    </tbody>
+</table>
+{% endblock content %}

@@ -1,0 +1,76 @@
+{% extends "../base.html" %}
+{% load tz %}
+
+{% block title %}Messages - {% endblock title %}
+
+{% block search_form %}
+        <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search Message" aria-label="Search">
+            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+{% endblock search_form %}
+
+{% block page_links %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class='nav-link {% if request.session.all %}active{% endif %}' href="{% url 'contact_us_app:all_inquiries' %}">All {{ request.session.active }}</a>
+    </li>
+    <li class="nav-item">
+        <a class='nav-link {% if request.session.unread %}active{% endif %}' href="{% url 'contact_us_app:unread_inquiries' %}">Unread</a>
+    </li>
+    <li class="nav-item">
+        <a class='nav-link {% if request.session.read %}active{% endif %}' href="{% url 'contact_us_app:read_inquiries' %}">Read</a>
+    </li>
+</ul>
+{% endblock page_links %}
+
+{% block content %}
+<table class="table table-hover table-responsive">
+    <thead class="thead-light">
+    <tr>
+        <th>From</th>
+        <th>Email</th>
+        <th>Inquiry</th>
+        <th>Received (UTC)</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        {% for object in inquiries %}
+        <tr>
+            <th scope="row"><a href="{% url 'contact_us_app:inquiry_details' object.pk %}">{{ object.cust_name }}</a></th>
+            <td>{{ object.cust_email_address }}</td>
+            <td>{{ object.cust_inquiry|truncatechars:50 }}</td>
+            <td>{{ object.timestamp|date:"SHORT_DATE_FORMAT" }} | {{ object.timestamp|time:"H:i" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination justify-content-center">
+    <ul class="pagination">
+        {% if inquiries.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1&q={{ request.GET.q }}">&laquo;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{inquiries.previous_page_number}}&q={{ request.GET.q }}">&#8249;</a></li>
+        {% endif %}
+
+        {% for pg in page_range %}
+            {% if inquiries.number == pg %}
+                <li class="page-item"><a class="page-link" href="?page={{pg}}&q={{ request.GET.q }}" class="btn btn-default">{{pg}}</a></li>
+            {% else %}
+                <li class="page-item"><a class="page-link" href="?page={{pg}}&q={{ request.GET.q }}" class="btn">{{pg}}</a></li>
+            {% endif %}
+        {% endfor %}
+
+        {% if inquiries.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{inquiries.next_page_number}}&q={{ request.GET.q }}">&#8250;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ inquiries.paginator.num_pages }}&q={{ request.GET.q }}">&raquo;</a></li>
+        {% endif %}
+    </ul>
+</div>
+<span class="current float-right">
+    Page {{ inquiries.number }} of {{ inquiries.paginator.num_pages }}.
+</span>
+<br />
+
+{% endblock content %}
