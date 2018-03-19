@@ -21,7 +21,7 @@ class Gallery(models.Model):
     #=====================
 
     def get_absolute_url(self):
-        return reverse("gallery:details", kwargs={"slug": self.slug})
+        return reverse("gallery_app:details", kwargs={"slug": self.slug})
 
 def create_slug(instance, new_slug=None):  #to loop slug if already exists
     slug = slugify(instance.name)

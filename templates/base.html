@@ -23,20 +23,17 @@
 </head>
 <body>
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #0B237B;">
-    <a class="navbar-brand nav-title" href="{% url 'gallery:index' %}">Louvertech</a>
+    <a class="navbar-brand nav-title" href="{% url 'gallery_app:index' %}">Louvertech</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-            <!--<li class="nav-item active">
-                <a class="nav-link" href="{% url 'gallery:index' %}">Home<span class="sr-only">(current)</span></a>
-            </li>-->
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'contact_us_app:contact_us' %}">Contact Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'gallery:upload_product' %}">Add Product</a>
+                <a class="nav-link" href="{% url 'gallery_app:upload_product' %}">Add Product</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'contact_us_app:all_inquiries' %}">Messages</a>

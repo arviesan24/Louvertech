@@ -5,8 +5,8 @@ from .views import (
     accounts_login,
 )
 
-app_name = 'gallery_app'
+app_name = 'accounts_app'
 urlpatterns = [
-    path('accounts/signup', accounts_signup, name='signup'),
+    path('accounts/signup/', accounts_signup, name='signup'),
     path('accounts/login/', accounts_login, name='login')
 ]
