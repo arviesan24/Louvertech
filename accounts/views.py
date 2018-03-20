@@ -11,7 +11,7 @@ from django.contrib import messages
 # Create your views here.
 
 def accounts_signup(request):
-    next = request.GET.get("next")
+    # next = request.GET.get("next")
     form = AccountRegistrationForm(request.POST or None)
     if form.is_valid():
         user = form.save(commit=False)
@@ -34,10 +34,6 @@ def accounts_login(request):
     next = request.GET.get("next")
     form = AccountLoginForm(request.POST or None)
 
-    context = {
-        "form": form
-    }
-
     if form.is_valid():
 
 
@@ -48,6 +44,10 @@ def accounts_login(request):
         if next:
             return redirect(next)
         return redirect("/")
+
+    context = {
+        "form": form
+    }
 
     return render(request, "forms/login_form.html", context)
 
