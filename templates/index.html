@@ -8,8 +8,9 @@
         </form>
 {% endblock search_form %}
 
-{% block content %}
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+{% block gallery_banner %}
+    <div id="carouselExampleIndicators" class="carousel slide gallery_banner" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -17,7 +18,7 @@
         </ol>
         <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100 " src="{% static 'banners/1.jpg' %}" alt="First slide">
+            <img class="d-block w-100" src="{% static 'banners/1.jpg' %}" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
                 <h3>Louvertech Blinds</h3>
                 <p>Came straigth from Korea</p>
@@ -47,23 +48,27 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+{% endblock gallery_banner %}
 
-    <div class="row">
-    {% for object in gallery_app %}
-        <div class="col-md-6">
-            <div class="card mt-3 mb-3 h-90">
-                <h4 class="card-title text-center">{{ object.name|truncatechars:22 }}</h4>
-                <div class="custom_box">
-                    <img src="{{ object.image_location.url }}" class="img-thumbnail" alt="Card image">
-                    <div class="description">
-                        <p class="text-white card-text">{{ object.description|truncatechars:50 }}
-                        <b><a href='{{ object.get_absolute_url }}' class="text-white">Read More &raquo;</a></b></p>
-                    </div>
+
+{% block content %}
+
+<div class="row">
+{% for object in gallery_app %}
+    <div class="col-md-6">
+        <div class="card mt-3 mb-3 h-90">
+            <h4 class="card-title text-center">{{ object.name|truncatechars:22 }}</h4>
+            <div class="custom_box">
+                <img src="{{ object.image_location.url }}" class="img-thumbnail" alt="Card image">
+                <div class="description">
+                    <p class="text-white card-text">{{ object.description|truncatechars:50 }}
+                    <b><a href='{{ object.get_absolute_url }}' class="text-white">Read More &raquo;</a></b></p>
                 </div>
             </div>
         </div>
-    {% endfor %}
     </div>
+{% endfor %}
+</div>
 
 <div class="pagination justify-content-center">
     <ul class="pagination">
