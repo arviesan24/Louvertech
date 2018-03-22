@@ -14,7 +14,7 @@
   </div>
   {% endif %}
 
-<form method="post" action="" class="mb-3">
+<form method="post" action="" class="mb-3 pb-5">
     {% csrf_token %}
 
     {% if form.non_field_errors %}
@@ -51,7 +51,7 @@
         {% endif %}
     </div>
     {% endfor %}
-    <button type="submit" class="btn btn-outline-primary"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
+    <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
 </form>
 
 </div>

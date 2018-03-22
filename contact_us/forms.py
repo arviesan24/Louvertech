@@ -6,8 +6,8 @@ class SendInquiryForm(forms.ModelForm):
     cust_name = forms.CharField(label="Name")
     cust_email_address = forms.EmailField(label="Email Address", help_text='example@yahoo.com')
     cust_contact_number = forms.CharField(label="Contact Number", widget=forms.NumberInput, max_length=12, help_text='Example: 639191234567')
-    cust_location = forms.CharField(label="Installation Location", max_length=250, widget=forms.Textarea)
-    cust_inquiry = forms.CharField(label="Inquiry", max_length=1000, widget=forms.Textarea)
+    cust_location = forms.CharField(label="Installation Location", max_length=250, widget=forms.Textarea(attrs={'cols': 10, 'rows': 5}))
+    cust_inquiry = forms.CharField(label="Inquiry", max_length=1000, widget=forms.Textarea(attrs={'cols': 10, 'rows': 5}))
 
     class Meta:
         model = Contact_Us
