@@ -176,12 +176,19 @@ def inquiry_details(request, pk):
 
 @login_required
 def mark_as_read(request):
-    session_message_id = request.session['id']
-    session_instance = get_object_or_404(Contact_Us, pk=session_message_id)
+    '''
+    :param request: to change the marked_read = True
+    :return: if proper session ID was selected it will update the marked_read status of the record
+    '''
+    try:
+        session_message_id = request.session['id']
+        session_instance = get_object_or_404(Contact_Us, pk=session_message_id)
+        t = Contact_Us.objects.get(id=session_message_id)
+        t.marked_read = True
+        t.save()
 
-    t = Contact_Us.objects.get(id=session_message_id)
-    t.marked_read = True
-    t.save()
+    except KeyError:
+        raise Http404("Page does not exist")
 
     return render(request, 'inquiries/inquiry_details.html', {'message_body': session_instance})
 
@@ -189,5 +196,5 @@ def mark_as_read(request):
 
 #TODO: generic relations/sessions-to transfer value to diff. function
 #TODO: DONE! Pagination with custom number: https://stackoverflow.com/questions/30864011/display-only-some-of-the-page-numbers-by-django-pagination
-#TODO: user restrictions https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
+#TODO: Create logout page
 #TODO: breadcrumb

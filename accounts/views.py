@@ -17,6 +17,7 @@ def accounts_signup(request):
         user = form.save(commit=False)
         password = form.cleaned_data.get("password")
         user.set_password(password)
+        user.is_active = False
         user.save()
         # login(request, user)
         # if next:
