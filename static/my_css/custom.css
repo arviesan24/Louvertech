@@ -7,6 +7,16 @@ body {
     font-size: 25px;
 }
 
+.custom_btn {
+    color: #ffffff;
+    background: #0B237B;
+}
+
+.custom_btn:hover {
+    color: #ffffff;
+    background: #3256db;
+}
+
 .gallery_banner {
     margin-top: 64px;
     margin-bottom: -63px;

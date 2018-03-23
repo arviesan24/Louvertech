@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AnonymousUser
 from django.shortcuts import render, redirect
 from django.contrib.auth import (
     authenticate,
@@ -51,6 +52,15 @@ def accounts_login(request):
     }
 
     return render(request, "forms/login_form.html", context)
+
+
+def accounts_logout(request):
+    logout(request)
+    # if not AnonymousUser:
+    #     return redirect("/accounts/login/")
+    messages.success(request, 'You have been logged out successfully.')
+
+    return redirect("/accounts/login/")
 
 #TODO: fix signals to avoid is_active getting disabled all the time, it should only work on user registration
 #TODO: create 404 page

@@ -196,5 +196,4 @@ def mark_as_read(request):
 
 #TODO: generic relations/sessions-to transfer value to diff. function
 #TODO: DONE! Pagination with custom number: https://stackoverflow.com/questions/30864011/display-only-some-of-the-page-numbers-by-django-pagination
-#TODO: Create logout page
 #TODO: breadcrumb

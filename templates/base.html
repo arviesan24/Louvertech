@@ -32,16 +32,25 @@
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'contact_us_app:contact_us' %}">Contact Us</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'gallery_app:upload_product' %}">Add Product</a>
+
+            {% if user.is_authenticated %}
+
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user" aria-hidden="true"></i> {{ user.get_username }}
+            </a>
+            <div class="dropdown-menu" style="background-color: #0B237B; color: #ffffff;" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item custom_btn" href="{% url 'gallery_app:upload_product' %}">Add Product</a>
+                <a class="dropdown-item custom_btn" href="{% url 'contact_us_app:all_inquiries' %}">Messages</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item custom_btn" href="{% url 'accounts_app:logout' %}">Logout</a>
+            </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact_us_app:all_inquiries' %}">Messages</a>
-            </li>
-            <div class="dropdown-divider"></div>
             <li>
-                <a class="nav-link" href="{% url 'admin:login' %}">Admin</a>
+                <a class="nav-link" href="{% url 'admin:login' %}"><i class="fa fa-cog" aria-hidden="true"></i> Admin Panel</a>
             </li>
+            {% endif %}
+
         </ul>
         {% block search_form %}
         {% endblock search_form %}
@@ -59,7 +68,7 @@
 {% endblock content %}
 </div>
 
-<button onclick="topFunction()" id="UpBtn" class="btn btn-primary" title="Go to top"><i class="fa fa-arrow-up"></i></button>
+<button onclick="topFunction()" id="UpBtn" class="custom_btn border" title="Go to top"><i class="fa fa-arrow-up"></i></button>
 
 <div class="footer pb-2">
     <div class="row pt-3 mx-2">
