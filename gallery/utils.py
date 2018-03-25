@@ -1,29 +1,30 @@
-import random
-import string
-from django.utils.text import slugify
+from PIL import Image
+import glob, os
 
-def random_string_generator(size=10, chars=string.ascii_lowercase + string.digits):
-    return ''.join(random.choice(chars) for _ in range(size))
+def create_thumbnail(instance):
+    size = 400, 300
+
+    output_thumb, ext = os.path.splitext(str(instance.image_location))
+    file = Image.open(instance.image_location)
+    file.thumbnail(size, Image.ANTIALIAS)
+    file.save(output_thumb + ".thumbnail", "JPEG")
 
 
-def unique_slug_generator(instance, new_slug=None):
-    """
-    This is for a Django project and it assumes your instance
-    has a model with a slug field and a title character (char) field.
-    """
-    if new_slug is not None:
-        slug = new_slug
-    else:
-        slug = slugify(instance.name)
 
-    Klass = instance.__class__
-    qs_exists = Klass.objects.filter(slug=slug).exists()
+    # size = 128, 128
+    #
+    # for infile in glob.glob("*.jpg"):  #select all the files with .jpeg
+    #     file, ext = os.path.splitext(infile)  #split the file to filename(file) and extention(ext)
+    #     im = Image.open(infile)
+    #     im.thumbnail(size)
+    #     im.save(file + ".thumbnail", "JPEG")
 
-    if qs_exists:
-        new_slug = "{slug}-{randstr}".format(
-            slug=slug,
-            randstr=random_string_generator(size=4)
-        )
-        return unique_slug_generator(instance, new_slug=new_slug)
 
-    return slug
+    # outfile = os.path.splitext(infile)[0] + ".thumbnail"
+    # if infile != outfile:
+    #     try:
+    #         im = Image.open(infile)
+    #         im.thumbnail(size, Image.ANTIALIAS)
+    #         im.save(outfile, "JPEG")
+    #     except IOError:
+    #         print "cannot create thumbnail for '%s'" % infile

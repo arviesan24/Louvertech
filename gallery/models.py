@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.db.models.signals import pre_save
+from .utils import create_thumbnail
 
 # Create your models here.
 
@@ -11,6 +12,9 @@ class Gallery(models.Model):
     image_location = models.ImageField(upload_to='uploads/%Y/%m/%d/',
                                        null=False,
                                        blank=False)
+    thumbnail_location = models.ImageField(upload_to='uploads/thumbnails/%Y/%m/%d/',
+                                           null=False,
+                                           blank=False)
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     slug = models.SlugField(unique=True)
 
@@ -37,5 +41,6 @@ def create_slug(instance, new_slug=None):  #to loop slug if already exists
 def pre_save_gallery_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
         instance.slug = create_slug(instance)
+    create_thumbnail(instance)
 
 pre_save.connect(pre_save_gallery_receiver, sender=Gallery)
