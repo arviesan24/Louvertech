@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block search_form %}
         <form class="form-inline mt-2 mt-md-0">
@@ -59,7 +60,12 @@
         <div class="card mt-3 mb-3 h-90">
             <h4 class="card-title text-center">{{ object.name|truncatechars:22 }}</h4>
             <div class="custom_box">
-                <img src="{{ object.image_location.url }}" class="img-thumbnail" alt="Card image">
+                <!--<img src="{{ object.image_location.url }}" width="600" height="400" class="img-fluid alt="Card image">-->
+
+                {% thumbnail object.image_location "600x400" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-fluid">
+                {% endthumbnail %}
+
                 <div class="description">
                     <p class="text-white card-text">{{ object.description|truncatechars:50 }}
                     <b><a href='{{ object.get_absolute_url }}' class="text-white">Read More &raquo;</a></b></p>

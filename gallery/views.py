@@ -78,5 +78,3 @@ def product_details(request, slug=None):
     }
 
     return render(request, "product_details.html", context)
-
-#TODO: change the read more to jQuery popup
