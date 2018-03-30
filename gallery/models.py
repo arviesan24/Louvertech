@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.db.models.signals import pre_save
+from sorl.thumbnail import ImageField
 
 # Create your models here.
 

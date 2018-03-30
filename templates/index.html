@@ -64,6 +64,8 @@
 
                 {% thumbnail object.image_location "600x400" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-fluid">
+                {% empty %}
+                    <p>No image</p>
                 {% endthumbnail %}
 
                 <div class="description">
