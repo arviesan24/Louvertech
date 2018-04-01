@@ -22,35 +22,43 @@
 
 </head>
 <body>
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #0B237B;">
-    <a class="navbar-brand nav-title" href="{% url 'gallery:index' %}">Louvertech</a>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark" style="background-color: #0B237B;"><!--#562ECD-->
+    <a class="navbar-brand nav-title" href="{% url 'gallery_app:index' %}">Louvertech</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
-            <!--<li class="nav-item active">
-                <a class="nav-link" href="{% url 'gallery:index' %}">Home<span class="sr-only">(current)</span></a>
-            </li>-->
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'contact_us_app:contact_us' %}">Contact Us</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'gallery:upload_product' %}">Add Product</a>
+
+            {% if user.is_authenticated %}
+
+            <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-user" aria-hidden="true"></i> {{ user.get_username }}
+            </a>
+            <div class="dropdown-menu" style="background-color: #0B237B; color: #ffffff;" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item custom_btn" href="{% url 'gallery_app:upload_product' %}">Add Product</a>
+                <a class="dropdown-item custom_btn" href="{% url 'contact_us_app:all_inquiries' %}">Messages</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item custom_btn" href="{% url 'accounts_app:logout' %}">Logout</a>
+            </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact_us_app:all_inquiries' %}">Messages</a>
-            </li>
-            <div class="dropdown-divider"></div>
             <li>
-                <a class="nav-link" href="{% url 'admin:login' %}">Admin</a>
+                <a class="nav-link" href="{% url 'admin:login' %}"><i class="fa fa-cog" aria-hidden="true"></i> Admin Panel</a>
             </li>
+            {% endif %}
+
         </ul>
         {% block search_form %}
         {% endblock search_form %}
     </div>
 </nav>
 
+{% block gallery_banner %}
+{% endblock gallery_banner %}
 
 <div class="custom_div container pt-3 pb-3">
 {% block page_links %}
@@ -60,6 +68,7 @@
 {% endblock content %}
 </div>
 
+<button onclick="topFunction()" id="UpBtn" class="custom_btn border" title="Go to top"><i class="fa fa-arrow-up"></i></button>
 
 <div class="footer pb-2">
     <div class="row pt-3 mx-2">
@@ -90,6 +99,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
+<!-- Local JS files -->
+<script src="{% static 'my_js/custom.js' %}"></script>
 </body>
 </html>

@@ -7,10 +7,23 @@ body {
     font-size: 25px;
 }
 
-.prod_title {
-    font-family: 'Lobster', sans-serif;
-    color: #2d48ad;
+.custom_btn {
+    color: #ffffff;
+    background: #0B237B;
 }
+
+.custom_btn:hover {
+    color: #ffffff;
+    background: #3256db;
+}
+
+.gallery_banner {
+    margin-top: 64px;
+    margin-bottom: -63px;
+
+}
+
+/* Base HTML */
 
 .custom_div {
     background-color: #ffffff;
@@ -18,14 +31,52 @@ body {
     min-height: 600px;
 }
 
-.custom_card {
-    bottom-margin: 200px !important;
+/* Button Up */
+
+#UpBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 50%; /* Rounded corners */
+    font-size: 19px; /* Increase font size */
+    width: 60px;
+    border: 0;
 }
+
+/* Forms */
 
 .custom_box {
     position: relative;
     overflow: hidden;
 }
+.icon_div {
+    font-size: 75px;
+    color: #ffffff;
+    border-radius: 50%;
+    max-width: 120px;
+    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -75px;
+    opacity: 1.0;
+    background: #0B237B;
+    box-shadow: 5px 10px 10px -5px #666666;
+}
+
+.frm {
+    max-width: 500px;
+    margin-top: 70px;
+    box-shadow: 5px 10px 15px -5px #444444;
+    margin-bottom: 20px;
+}
+
+/* Gallery */
 
 .custom_box:hover .description {
     margin-bottom: 0;
@@ -34,8 +85,8 @@ body {
 .description {
     background: #545456;
     text-align: center;
-    height: 50px;
-    line-height: 40px;
+    height: 60px;
+    line-height: 30px;
     font-size: 16px;
     position: absolute;
     bottom: 0;
@@ -51,7 +102,12 @@ body {
     filter: alpha(opacity=75); /* For IE8 and earlier */
 }
 
+.prod_title {
+    font-family: 'Lobster', sans-serif;
+    color: #2d48ad;
+}
 
+/* Footer */
 .social-fonts {
     font-size: 35px;
 }

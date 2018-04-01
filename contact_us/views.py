@@ -1,5 +1,6 @@
+from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.http import Http404
@@ -23,6 +24,7 @@ def contact_us(request):
     }
     return render(request, "forms/contact_us_form.html", context)
 
+@login_required
 def all_inquiries(request):
     try:
         query_list = Contact_Us.objects.all().order_by('-timestamp')
@@ -34,7 +36,7 @@ def all_inquiries(request):
                 Q(cust_name__icontains=query) |
                 Q(cust_email_address__icontains=query) |
                 Q(cust_inquiry__icontains=query)
-            ).distinct()
+            ).distinct()  #to avoid duplicate result
         #=====END OF Search feature=======
 
         #=========Pagination============
@@ -70,6 +72,7 @@ def all_inquiries(request):
         raise Http404("No messages received.")
     return render(request, 'inquiries/display_all.html', {'inquiries': page_content, 'page_range': page_range})
 
+@login_required
 def unread_inquiries(request):
     try:
         query_list = Contact_Us.objects.filter(marked_read=False).order_by('-timestamp')
@@ -117,7 +120,7 @@ def unread_inquiries(request):
         raise Http404("No messages received.")
     return render(request, 'inquiries/display_all.html', {'inquiries': page_content, 'page_range': page_range})
 
-
+@login_required
 def read_inquiries(request):
     try:
         query_list = Contact_Us.objects.filter(marked_read=True).order_by('-timestamp')
@@ -165,19 +168,27 @@ def read_inquiries(request):
         raise Http404("No messages received.")
     return render(request, 'inquiries/display_all.html', {'inquiries': page_content, 'page_range': page_range})
 
+@login_required
 def inquiry_details(request, pk):
     message_body = get_object_or_404(Contact_Us, pk=pk)
     request.session['id'] = pk  #save in session the mess id to use it in mark_as_read()
     return render(request, 'inquiries/inquiry_details.html', {'message_body': message_body})
 
-
+@login_required
 def mark_as_read(request):
-    session_message_id = request.session['id']
-    session_instance = get_object_or_404(Contact_Us, pk=session_message_id)
+    '''
+    :param request: to change the marked_read = True
+    :return: if proper session ID was selected it will update the marked_read status of the record
+    '''
+    try:
+        session_message_id = request.session['id']
+        session_instance = get_object_or_404(Contact_Us, pk=session_message_id)
+        t = Contact_Us.objects.get(id=session_message_id)
+        t.marked_read = True
+        t.save()
 
-    t = Contact_Us.objects.get(id=session_message_id)
-    t.marked_read = True
-    t.save()
+    except KeyError:
+        raise Http404("Page does not exist")
 
     return render(request, 'inquiries/inquiry_details.html', {'message_body': session_instance})
 
@@ -185,5 +196,4 @@ def mark_as_read(request):
 
 #TODO: generic relations/sessions-to transfer value to diff. function
 #TODO: DONE! Pagination with custom number: https://stackoverflow.com/questions/30864011/display-only-some-of-the-page-numbers-by-django-pagination
-#TODO: user restrictions https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/Authentication
 #TODO: breadcrumb

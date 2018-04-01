@@ -19,11 +19,13 @@ from django.urls import path, include
 from django.conf.urls.static import static
 
 urlpatterns = [  #namespace - only use it for sets of urls
-    path('', include('gallery.urls', namespace='gallery')),  #if using namespace, add => app_name = 'gallery' to gallery/urls.py
+    path('', include('gallery.urls', namespace='gallery_app')),  #if using namespace, add => app_name = 'gallery' to gallery/urls.py
     path('', include('contact_us.urls', namespace='contact_us_app')),
+    path('', include('accounts.urls', namespace='accounts_app')),
 
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),
+
+    #path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 if settings.DEBUG:

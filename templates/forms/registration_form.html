@@ -1,19 +1,26 @@
 {% extends '../base.html' %}
 {% load widget_tweaks %}
-{% block title %}Contact Us - {% endblock title %}
+{% block title %}Register - {% endblock title %}
 
 {% block content %}
-<div class="container-fluid frm border pt-3" style="max-width:700px">
-    <div class="icon_div"><i class="fa fa-comments" aria-hidden="true"></i></div>
-    <h2>Questions? Send us a message.</h2>
+<div class="container-fluid frm border pt-3">
+    <div class="icon_div"><i class="fa fa-user-plus" aria-hidden="true"></i></div>
+    <h2>Register</h2>
 
-  {% if messages %}
-  <div class="alert alert-success" role="alert">
-      {% for message in messages %}
-      <strong>Well done! </strong>{{ message }}
-      {% endfor %}
-  </div>
-  {% endif %}
+    {% if messages %}
+        <div class="alert alert-success" role="alert">
+          {% for message in messages %}
+          <strong>Well done! </strong>{{ message }}
+          {% endfor %}
+        </div>
+        <script>
+            function redirect(){
+               window.location.href = "{% url 'gallery_app:index' %}";
+            }
+
+            setTimeout(redirect, 5000); //2000 is equivalent to 2 seconds
+        </script>
+    {% endif %}
 
 <form method="post" action="" class="mb-3 pb-5">
     {% csrf_token %}
@@ -52,7 +59,9 @@
         {% endif %}
     </div>
     {% endfor %}
-    <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-paper-plane"></i> Send</button>
+    <small>Already have an account? Login <a href="{% url 'accounts_app:login' %}">here.</a><br><br></small>
+    <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-user-plus" aria-hidden="true"></i> Sign Up</button>
+
 </form>
 
 </div>

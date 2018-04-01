@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load thumbnail %}
 
 {% block search_form %}
         <form class="form-inline mt-2 mt-md-0">
@@ -8,8 +9,9 @@
         </form>
 {% endblock search_form %}
 
-{% block content %}
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+
+{% block gallery_banner %}
+    <div id="carouselExampleIndicators" class="carousel slide gallery_banner" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
@@ -17,7 +19,7 @@
         </ol>
         <div class="carousel-inner">
         <div class="carousel-item active">
-            <img class="d-block w-100 " src="{% static 'banners/1.jpg' %}" alt="First slide">
+            <img class="d-block w-100" src="{% static 'banners/1.jpg' %}" alt="First slide">
             <div class="carousel-caption d-none d-md-block">
                 <h3>Louvertech Blinds</h3>
                 <p>Came straigth from Korea</p>
@@ -47,70 +49,58 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+{% endblock gallery_banner %}
 
-    <div class="row">
-    {% for object in gallery %}
-        <div class="col-md-6">
-            <div class="card mt-3 mb-3 h-90">
-                <h4 class="card-title text-center">{{ object.name|truncatechars:22 }}</h4>
-                <div class="custom_box">
-                    <img src="{{ object.image_location.url }}" class="img-thumbnail" alt="Card image">
-                    <div class="description">
-                        <p class="text-white card-text">{{ object.description|truncatechars:25 }}
-                        <b><a href='{{ object.get_absolute_url }}' class="text-white">Read More &raquo;</a></b></p>
-                    </div>
+
+{% block content %}
+
+<div class="row">
+{% for object in gallery_app %}
+    <div class="col-md-6">
+        <div class="card mt-3 mb-3 h-90">
+            <h4 class="card-title text-center">{{ object.name|truncatechars:22 }}</h4>
+            <div class="custom_box">
+                <!--<img src="{{ object.image_location.url }}" width="600" height="400" class="img-fluid alt="Card image">-->
+
+                {% thumbnail object.image_location "600x400" crop="center" as im %}
+                    <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-fluid">
+                {% empty %}
+                    <p>No image</p>
+                {% endthumbnail %}
+
+                <div class="description">
+                    <p class="text-white card-text">{{ object.description|truncatechars:50 }}
+                    <b><a href='{{ object.get_absolute_url }}' class="text-white">Read More &raquo;</a></b></p>
                 </div>
             </div>
         </div>
-    {% endfor %}
     </div>
-
-<!--
-    <div class="row">
-    {% for object in gallery %}
-        <div class="col-md-6">
-            <div class="card mt-3 mb-3 h-90">
-                <div class="card-body">
-                    <img src="{{ object.image_location.url }}" class="card-img-top img-thumbnail" alt="Card image">
-                    <div class="card-body">
-                    <h4 class="card-title">{{ object.name }}</h4>
-                        <p class="card-text">   {{ object.description|truncatechars:65 }}</p>
-                        <!--{% url "gallery:details" object.slug %}
-                        <a href='{{ object.get_absolute_url }}' class="btn btn-primary">Read More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    </div>
--->
-
-
-
+{% endfor %}
+</div>
 
 <div class="pagination justify-content-center">
     <ul class="pagination">
-        {% if gallery.has_previous %}
+        {% if gallery_app.has_previous %}
         <li class="page-item"><a class="page-link" href="?page=1&q={{ request.GET.q }}">&laquo;</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{gallery.previous_page_number}}&q={{ request.GET.q }}">&#8249;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{gallery_app.previous_page_number}}&q={{ request.GET.q }}">&#8249;</a></li>
         {% endif %}
 
         {% for pg in page_range %}
-            {% if gallery.number == pg %}
+            {% if gallery_app.number == pg %}
                 <li class="page-item"><a class="page-link" href="?page={{pg}}&q={{ request.GET.q }}" class="btn btn-default">{{pg}}</a></li>
             {% else %}
                 <li class="page-item"><a class="page-link" href="?page={{pg}}&q={{ request.GET.q }}" class="btn">{{pg}}</a></li>
             {% endif %}
         {% endfor %}
 
-        {% if gallery.has_next %}
-        <li class="page-item"><a class="page-link" href="?page={{gallery.next_page_number}}&q={{ request.GET.q }}">&#8250;</a></li>
-        <li class="page-item"><a class="page-link" href="?page={{ gallery.paginator.num_pages }}&q={{ request.GET.q }}">&raquo;</a></li>
+        {% if gallery_app.has_next %}
+        <li class="page-item"><a class="page-link" href="?page={{gallery_app.next_page_number}}&q={{ request.GET.q }}">&#8250;</a></li>
+        <li class="page-item"><a class="page-link" href="?page={{ gallery_app.paginator.num_pages }}&q={{ request.GET.q }}">&raquo;</a></li>
         {% endif %}
     </ul>
 </div>
 <span class="current float-right">
-    Page {{ gallery.number }} of {{ gallery.paginator.num_pages }}.
+    Page {{ gallery_app.number }} of {{ gallery_app.paginator.num_pages }}.
 </span><br>
 
 {% endblock content %}

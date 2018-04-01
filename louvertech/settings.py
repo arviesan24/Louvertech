@@ -40,8 +40,10 @@ INSTALLED_APPS = [
 
     'gallery',
     'contact_us',
+    'accounts',
 
     'widget_tweaks',
+    'sorl.thumbnail',
 
 ]
 

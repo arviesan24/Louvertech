@@ -3,8 +3,11 @@
 {% block title %}Add Product - {% endblock title %}
 
 {% block content %}
-<div class="container-fluid border mt-3">
+<div class="container-fluid frm border pt-3" style="max-width:700px">
+    <div class="icon_div"><i class="fa fa-image" aria-hidden="true"></i></div>
     <h2>Add a product.</h2>
+
+
 
 {% if messages %}
     <div class="alert alert-success" role="alert">
@@ -14,7 +17,7 @@
     </div>
 {% endif %}
 
-<form method="post" action="" enctype="multipart/form-data" class="mb-3">
+<form method="post" action="" enctype="multipart/form-data" class="mb-3 pb-5">
   {% csrf_token %}
 
 
@@ -52,7 +55,7 @@
     </div>
   {% endfor %}
 
-  <button type="submit" class="btn btn-outline-primary">Submit</button>
+  <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-save"></i> Save</button>
 </form>
 </div>
 {% endblock content %}

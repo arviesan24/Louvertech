@@ -54,7 +54,7 @@ def index(request):
 
     except Gallery.DoesNotExist:
         raise Http404("Images does not exist")
-    return render(request, 'index.html', {'gallery': page_content, 'page_range': page_range})
+    return render(request, 'index.html', {'gallery_app': page_content, 'page_range': page_range})
 
 @login_required
 def upload_product(request):
@@ -78,5 +78,3 @@ def product_details(request, slug=None):
     }
 
     return render(request, "product_details.html", context)
-
-#TODO: change the read more to jQuery popup

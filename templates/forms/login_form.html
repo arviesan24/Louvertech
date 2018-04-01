@@ -1,12 +1,11 @@
 {% extends '../base.html' %}
 {% load widget_tweaks %}
-{% block title %}Contact Us - {% endblock title %}
+{% block title %}Login - {% endblock title %}
 
 {% block content %}
-<div class="container-fluid frm border pt-3" style="max-width:700px">
-    <div class="icon_div"><i class="fa fa-comments" aria-hidden="true"></i></div>
-    <h2>Questions? Send us a message.</h2>
-
+<div class="container-fluid frm border pt-3">
+    <div class="icon_div"><i class="fa fa-user" aria-hidden="true"></i></div>
+    <h2>Login</h2>
   {% if messages %}
   <div class="alert alert-success" role="alert">
       {% for message in messages %}
@@ -52,7 +51,8 @@
         {% endif %}
     </div>
     {% endfor %}
-    <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-paper-plane"></i> Send</button>
+    <small>No account? Sign-up <a href="{% url 'accounts_app:signup' %}">here.</a><br><br></small>
+    <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</button>
 </form>
 
 </div>
