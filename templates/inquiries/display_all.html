@@ -45,7 +45,7 @@
                     <input class="checkbox" type="checkbox" name="checkbox[]" value="{{ object.pk }}" />
                 </th>
                 <td scope="row"><a href="{% url 'contact_us_app:inquiry_details' object.pk %}"><b>{{ object.cust_name }}</b></a></td>
-                <td>{{ object.cust_email_address }}</td>
+                <td><a href="mailto:{{ object.cust_email_address }}">{{ object.cust_email_address }}</a></td>
                 <td>{{ object.cust_inquiry|truncatechars:50 }}</td>
                 <td>{{ object.timestamp|date:"SHORT_DATE_FORMAT" }} | {{ object.timestamp|time:"H:i" }}</td>
             </tr>

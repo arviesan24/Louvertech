@@ -10,8 +10,8 @@ from django.contrib.auth import (
 User = get_user_model()
 
 class AccountRegistrationForm(forms.ModelForm):
-    email = forms.EmailField(label="Email Address")
-    email2 = forms.EmailField(label="Confirm Email")
+    email = forms.EmailField(label="Email Address", max_length=120)
+    email2 = forms.EmailField(label="Confirm Email", max_length=120)
     password = forms.CharField(widget=forms.PasswordInput)
     password2 = forms.CharField(widget=forms.PasswordInput, label="Reenter Password")
 
@@ -43,7 +43,7 @@ class AccountRegistrationForm(forms.ModelForm):
         return password
 
 class AccountLoginForm(forms.Form):
-    username = forms.CharField()
+    username = forms.CharField(max_length=120)
     password = forms.CharField(widget=forms.PasswordInput)
 
     def clean(self, *args, **kwargs):
