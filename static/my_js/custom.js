@@ -33,6 +33,3 @@ $('.checkbox').change(function(){
         $("#select_all").prop('checked', true);
     }
 });
-
-//resize the text area form TinyMCE text editor
-document.getElementById(id+'_tbl').style.width='100%'

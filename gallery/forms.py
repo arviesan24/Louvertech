@@ -12,7 +12,7 @@ class UploadFileForm(forms.ModelForm):
     '''
     name = forms.CharField(label="Product Name", max_length=120)
     description = forms.CharField(widget=TinyMCEWidget(
-            attrs={'required': True, 'cols': 10, 'rows': 5}
+            mce_attrs={'required': True, 'width': 670}
         )
     )
     image_location = forms.ImageField(label="Upload Photo")
