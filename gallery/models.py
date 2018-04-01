@@ -8,7 +8,7 @@ from sorl.thumbnail import ImageField
 
 class Gallery(models.Model):
     name = models.CharField(max_length=120, unique=True)
-    description = models.TextField(max_length=500)
+    description = models.TextField(max_length=2000)
     image_location = models.ImageField(upload_to='uploads/%Y/%m/%d/',
                                        null=False,
                                        blank=False)
