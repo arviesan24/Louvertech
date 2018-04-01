@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.http import Http404
@@ -167,6 +167,27 @@ def read_inquiries(request):
     except Contact_Us.DoesNotExist:
         raise Http404("No messages received.")
     return render(request, 'inquiries/display_all.html', {'inquiries': page_content, 'page_range': page_range})
+
+@login_required
+def delete_inquiries(request):
+    '''
+    :param request: from display_all.html submit request
+    :param checkbox[]: list of selected records via pk
+    '''
+    delete_list = request.POST.getlist("checkbox[]")
+    instance = Contact_Us.objects.filter(pk__in=delete_list)
+    instance.delete()
+
+    try:
+        if request.session['unread']:
+            return redirect('contact_us_app:unread_inquiries')
+        elif request.session['read']:
+            return redirect('contact_us_app:read_inquiries')
+        else:
+            return redirect('contact_us_app:all_inquiries')
+
+    except KeyError:
+        raise Http404("Page does not exist")
 
 @login_required
 def inquiry_details(request, pk):
