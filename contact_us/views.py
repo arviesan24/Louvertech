@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.http import Http404
@@ -169,6 +169,27 @@ def read_inquiries(request):
     return render(request, 'inquiries/display_all.html', {'inquiries': page_content, 'page_range': page_range})
 
 @login_required
+def delete_inquiries(request):
+    '''
+    :param request: from display_all.html submit request
+    :param checkbox[]: list of selected records via pk
+    '''
+    delete_list = request.POST.getlist("checkbox[]")
+    instance = Contact_Us.objects.filter(pk__in=delete_list)
+    instance.delete()
+
+    try:
+        if request.session['unread']:
+            return redirect('contact_us_app:unread_inquiries')
+        elif request.session['read']:
+            return redirect('contact_us_app:read_inquiries')
+        else:
+            return redirect('contact_us_app:all_inquiries')
+
+    except KeyError:
+        raise Http404("Page does not exist")
+
+@login_required
 def inquiry_details(request, pk):
     message_body = get_object_or_404(Contact_Us, pk=pk)
     request.session['id'] = pk  #save in session the mess id to use it in mark_as_read()
@@ -183,9 +204,9 @@ def mark_as_read(request):
     try:
         session_message_id = request.session['id']
         session_instance = get_object_or_404(Contact_Us, pk=session_message_id)
-        t = Contact_Us.objects.get(id=session_message_id)
-        t.marked_read = True
-        t.save()
+        instance = Contact_Us.objects.get(id=session_message_id)
+        instance.marked_read = True
+        instance.save()
 
     except KeyError:
         raise Http404("Page does not exist")

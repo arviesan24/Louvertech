@@ -6,7 +6,8 @@ from .views import (
     unread_inquiries,
     read_inquiries,
     inquiry_details,
-    mark_as_read
+    mark_as_read,
+    delete_inquiries
 )
 
 app_name = 'contact_us_app'
@@ -18,5 +19,7 @@ urlpatterns = [
     path('messages/read/', read_inquiries, name='read_inquiries'),
 
     path('messages/<int:pk>/', inquiry_details, name='inquiry_details'),
-    path('mark_as_read/', mark_as_read, name='mark_as_read')
+    path('mark_as_read/', mark_as_read, name='mark_as_read'),
+
+    path('messages/delete/', delete_inquiries, name='delete_inquiries'),
 ]

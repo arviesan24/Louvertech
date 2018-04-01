@@ -25,9 +25,11 @@
 {% endblock page_links %}
 
 {% block content %}
+<label for="delete-button" onclick="return confirm('Do you really want to permanently delete the selected records?')" class="btn btn-outline-danger my-3 pull-right">Delete Selected</label>
 <table class="table table-hover table-responsive">
     <thead class="thead-light">
     <tr>
+        <th><input type="checkbox" id="select_all"> All</th>
         <th>From</th>
         <th>Email</th>
         <th>Inquiry</th>
@@ -36,14 +38,20 @@
     </thead>
 
     <tbody>
-        {% for object in inquiries %}
-        <tr>
-            <th scope="row"><a href="{% url 'contact_us_app:inquiry_details' object.pk %}">{{ object.cust_name }}</a></th>
-            <td>{{ object.cust_email_address }}</td>
-            <td>{{ object.cust_inquiry|truncatechars:50 }}</td>
-            <td>{{ object.timestamp|date:"SHORT_DATE_FORMAT" }} | {{ object.timestamp|time:"H:i" }}</td>
-        </tr>
-        {% endfor %}
+        <form method="post" action="{% url 'contact_us_app:delete_inquiries' %}">{% csrf_token %}
+            {% for object in inquiries %}
+            <tr>
+                <th>
+                    <input class="checkbox" type="checkbox" name="checkbox[]" value="{{ object.pk }}" />
+                </th>
+                <td scope="row"><a href="{% url 'contact_us_app:inquiry_details' object.pk %}"><b>{{ object.cust_name }}</b></a></td>
+                <td><a href="mailto:{{ object.cust_email_address }}">{{ object.cust_email_address }}</a></td>
+                <td>{{ object.cust_inquiry|truncatechars:50 }}</td>
+                <td>{{ object.timestamp|date:"SHORT_DATE_FORMAT" }} | {{ object.timestamp|time:"H:i" }}</td>
+            </tr>
+            {% endfor %}
+            <input type="submit" id="delete-button" style="visibility: hidden;">
+         </form>
     </tbody>
 </table>
 
