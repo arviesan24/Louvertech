@@ -25,6 +25,8 @@ urlpatterns = [  #namespace - only use it for sets of urls
 
     path('admin/', admin.site.urls),
 
+    path('tinymce/', include('tinymce.urls')),
+
     #path('accounts/', include('django.contrib.auth.urls')),
 ]
 

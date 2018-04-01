@@ -2,13 +2,13 @@ from django.db import models
 from django.urls import reverse
 from django.template.defaultfilters import slugify
 from django.db.models.signals import pre_save
-from sorl.thumbnail import ImageField
+from tinymce import HTMLField
 
 # Create your models here.
 
 class Gallery(models.Model):
     name = models.CharField(max_length=120, unique=True)
-    description = models.TextField(max_length=2000)
+    description = HTMLField('Content')
     image_location = models.ImageField(upload_to='uploads/%Y/%m/%d/',
                                        null=False,
                                        blank=False)
