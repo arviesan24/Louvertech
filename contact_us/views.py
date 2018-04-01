@@ -204,9 +204,9 @@ def mark_as_read(request):
     try:
         session_message_id = request.session['id']
         session_instance = get_object_or_404(Contact_Us, pk=session_message_id)
-        t = Contact_Us.objects.get(id=session_message_id)
-        t.marked_read = True
-        t.save()
+        instance = Contact_Us.objects.get(id=session_message_id)
+        instance.marked_read = True
+        instance.save()
 
     except KeyError:
         raise Http404("Page does not exist")
