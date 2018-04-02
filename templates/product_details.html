@@ -47,9 +47,23 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <div class="container-fluid">
+    {% if messages %}
+    <div class="alert alert-success" role="alert">
+    {% for message in messages %}
+        <strong>Well done! </strong>{{ message }}
+    {% endfor %}
+    </div>
+    {% endif %}
+
     <div class="row">
         <div class="col-md-8 offset-md-2 border">
             <h1 align="center" class="prod_title">{{ product_name }}</h1>
+
+            {% if request.user.is_authenticated %}
+            <small class="pull-right">
+                [<a href="{% url 'gallery_app:edit_product' slug=instance.slug %}"><i class="fa fa-edit"></i>Edit</a>]
+            </small>
+            {% endif %}
 
             {% if instance.image_location.url %}
                 <img src="{{ instance.image_location.url }}" class="img-fluid"/>
