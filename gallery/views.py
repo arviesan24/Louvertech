@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 from .models import Gallery
@@ -84,7 +84,12 @@ def edit_product(request, slug=None):
     '''
     request.session['add_product'] = False
     instance = get_object_or_404(Gallery, slug=slug)
+
     form = UploadFileForm(request.POST or None, request.FILES or None, instance=instance)
+
+    if "cancel" in request.POST:  # if cancel pressed in edit product form
+        return HttpResponseRedirect(instance.get_absolute_url())
+
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()

@@ -59,7 +59,14 @@
     </div>
   {% endfor %}
 
-  <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-save"></i> Save</button>
+    <button type="submit" class="btn btn-primary float-right"><i class="fa fa-save"></i> Save</button>
+
+    {% if request.session.add_product %}
+    <a href="{% url 'gallery_app:index' %}" class="btn btn-outline-primary float-right mr-3"><i class="fa fa-angle-left"></i> Cancel</a>
+    {% else %}
+    <button type="submit" class="btn btn-outline-primary float-right mr-3" name="cancel"><i class="fa fa-angle-left"></i> Cancel</button>
+    {% endif %}
+
 </form>
 </div>
 {% endblock content %}
