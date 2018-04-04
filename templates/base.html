@@ -35,7 +35,7 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'contact_us_app:contact_us' %}">Contact Us</a>
+                <a class="nav-link" href="{% url 'contact_us_app:contact_us' %}"><i class="fa fa-comments"></i> Contact Us</a>
             </li>
 
             {% if user.is_authenticated %}
@@ -62,10 +62,12 @@
     </div>
 </nav>
 
+
+
+<div class="custom_div container pt-3 pb-3">
 {% block gallery_banner %}
 {% endblock gallery_banner %}
 
-<div class="custom_div container pt-3 pb-3">
 {% block page_links %}
 {% endblock page_links %}
 
@@ -83,7 +85,7 @@
             <a target="_blank" href="https://twitter.com/louvertech" class="btn btn-outline-primary"><i class="fa fa-twitter fa-2 social-fonts"></i></a>
             <a target="_blank" href="https://www.instagram.com/louvertech_phil/" class="btn btn-outline-primary"><i class="fa fa-instagram fa-2 social-fonts"></i></a>
             <h5 class="pt-2">Email us</h5>
-            <p id="email-link"><i class="fa fa-envelope"></i> <a href="mailto:louvertechphilippinesinc@gmail.com">louvertechphilippinesinc@gmail.com</a></p>
+            <p id="email-link"><i class="fa fa-address-card"></i> <a href="mailto:louvertechphilippinesinc@gmail.com">louvertechphilippinesinc@gmail.com</a></p>
         </div>
         <div class="col-sm-7">
             <h5>Visit our store</h5>

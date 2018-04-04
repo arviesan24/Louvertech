@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
 from django.contrib import messages
 from .models import Gallery
@@ -111,3 +111,6 @@ def product_details(request, slug=None):
     }
 
     return render(request, "product_details.html", context)
+
+
+#TODO: Auto delete image file when deleted the record

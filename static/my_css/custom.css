@@ -18,8 +18,11 @@ body {
 }
 
 .gallery_banner {
+    margin-top: 3px;
+    /*
     margin-top: 64px;
     margin-bottom: -63px;
+    */
 
 }
 
