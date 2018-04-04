@@ -30,7 +30,7 @@ def index(request):
 
         #=========Pagination============
 
-        paginator = Paginator(query_list, 10)
+        paginator = Paginator(query_list, 12)
 
         try:
             page = int(request.GET.get('page', '1'))
@@ -113,4 +113,4 @@ def product_details(request, slug=None):
     return render(request, "product_details.html", context)
 
 
-#TODO: Auto delete image file when deleted the record
+#TODO: Auto delete image file when deleted the record: https://timonweb.com/posts/cleanup-files-and-images-on-model-delete-in-django/
