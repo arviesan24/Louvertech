@@ -37,8 +37,6 @@ def accounts_login(request):
     form = AccountLoginForm(request.POST or None)
 
     if form.is_valid():
-
-
         username = form.cleaned_data.get("username")
         password = form.cleaned_data.get("password")
         user = authenticate(username=username, password=password)
@@ -62,5 +60,4 @@ def accounts_logout(request):
 
     return redirect("/accounts/login/")
 
-#TODO: fix signals to avoid is_active getting disabled all the time, it should only work on user registration
 #TODO: create 404 page

@@ -18,9 +18,16 @@ body {
 }
 
 .gallery_banner {
+    /*margin-top: 3px;*/
+
     margin-top: 64px;
     margin-bottom: -63px;
 
+
+}
+
+.w-100 {
+    min-height: 150px;
 }
 
 /* Base HTML */
@@ -31,7 +38,7 @@ body {
     min-height: 600px;
 }
 
-/* Button Up */
+/* Up Button */
 
 #UpBtn {
     display: none; /* Hidden by default */

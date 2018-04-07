@@ -11,13 +11,16 @@ function scrollFunction() {
     }
 }
 
-// When the user clicks on the button, scroll to the top of the document
+
+// When the user clicks on the button, scroll to the top of the document, 'smooth' will make the animation move
 function topFunction() {
-    document.body.scrollTop = 0; // For Safari
-    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
 }
 
-//select all checkboxes
+
+
+
+//select all checkboxes in messages App
 $("#select_all").change(function(){  //"select all" change
     $(".checkbox").prop('checked', $(this).prop("checked")); //change all ".checkbox" checked status
 });

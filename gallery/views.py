@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from django.shortcuts import render, get_object_or_404
 from django.http import Http404, HttpResponseRedirect
+from django.contrib import messages
 from .models import Gallery
 from django.db.models import Q
 
@@ -29,7 +30,7 @@ def index(request):
 
         #=========Pagination============
 
-        paginator = Paginator(query_list, 10)
+        paginator = Paginator(query_list, 12)
 
         try:
             page = int(request.GET.get('page', '1'))
@@ -58,13 +59,45 @@ def index(request):
 
 @login_required
 def upload_product(request):
+    '''
+    request.session['add_product'] - change the title of the form to add product
+    '''
+    request.session['add_product'] = True
     form = UploadFileForm(request.POST or None, request.FILES or None)
     if form.is_valid():
         instance = form.save(commit=False)
         instance.save()
+        messages.success(request, 'Product successfully saved.')
         return HttpResponseRedirect(instance.get_absolute_url())
     context = {
         "form": form,
+
+    }
+    return render(request, "forms/add_gallery_form.html", context)
+
+@login_required
+def edit_product(request, slug=None):
+    '''
+        request.session['add_product'] - change the title of the form to edit product
+        get the value of slug to set it as the default value to edit in the form
+        instance.save() - will automatically consider by django as update request since existing value is present
+    '''
+    request.session['add_product'] = False
+    instance = get_object_or_404(Gallery, slug=slug)
+
+    form = UploadFileForm(request.POST or None, request.FILES or None, instance=instance)
+
+    if "cancel" in request.POST:  # if cancel pressed in edit product form
+        return HttpResponseRedirect(instance.get_absolute_url())
+
+    if form.is_valid():
+        instance = form.save(commit=False)
+        instance.save()
+        messages.success(request, 'Product successfully edited.')
+        return HttpResponseRedirect(instance.get_absolute_url())
+    context = {
+        "form": form,
+
     }
     return render(request, "forms/add_gallery_form.html", context)
 
@@ -78,3 +111,6 @@ def product_details(request, slug=None):
     }
 
     return render(request, "product_details.html", context)
+
+
+#TODO: Auto delete image file when deleted the record: https://timonweb.com/posts/cleanup-files-and-images-on-model-delete-in-django/

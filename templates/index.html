@@ -56,13 +56,13 @@
 
 <div class="row">
 {% for object in gallery_app %}
-    <div class="col-md-6">
-        <div class="card mt-3 mb-3 h-90">
+    <div class="col-lg-3 col-md-4 col-sm-6" style="padding:0px;">
+        <div class="card h-90 border-0"><!--<div class="card mt-3 mb-3 h-90">-->
             <h4 class="card-title text-center">{{ object.name|truncatechars:22 }}</h4>
             <div class="custom_box">
                 <!--<img src="{{ object.image_location.url }}" width="600" height="400" class="img-fluid alt="Card image">-->
 
-                {% thumbnail object.image_location "600x400" crop="center" as im %}
+                {% thumbnail object.image_location "550x300" crop="center" as im %}
                     <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}" class="img-fluid">
                 {% empty %}
                     <p>No image</p>

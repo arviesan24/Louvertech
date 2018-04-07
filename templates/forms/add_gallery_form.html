@@ -1,11 +1,15 @@
 {% extends '../base.html' %}
 {% load widget_tweaks %}
-{% block title %}Add Product - {% endblock title %}
+{% block title %}{% if request.session.add_product %}Add Product{% else %}Edit Product{% endif %} - {% endblock title %}
+
+{% block form_media_header %}
+{{ form.media }}
+{% endblock form_media_header %}
 
 {% block content %}
 <div class="container-fluid frm border pt-3" style="max-width:700px">
     <div class="icon_div"><i class="fa fa-image" aria-hidden="true"></i></div>
-    <h2>Add a product.</h2>
+    <h2>{% if request.session.add_product %}Add Product{% else %}Edit Product{% endif %}</h2>
 
 
 
@@ -55,7 +59,14 @@
     </div>
   {% endfor %}
 
-  <button type="submit" class="btn btn-outline-primary float-right"><i class="fa fa-save"></i> Save</button>
+    <button type="submit" class="btn btn-primary float-right"><i class="fa fa-save"></i> Save</button>
+
+    {% if request.session.add_product %}
+    <a href="{% url 'gallery_app:index' %}" class="btn btn-outline-primary float-right mr-3"><i class="fa fa-angle-left"></i> Cancel</a>
+    {% else %}
+    <button type="submit" class="btn btn-outline-primary float-right mr-3" name="cancel"><i class="fa fa-angle-left"></i> Cancel</button>
+    {% endif %}
+
 </form>
 </div>
 {% endblock content %}
