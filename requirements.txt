@@ -1,4 +1,4 @@
-Django==2.0.3
+Django==2.0.4
 django-tinymce4-lite==1.7.0
 django-widget-tweaks==1.4.1
 jsmin==2.2.2
