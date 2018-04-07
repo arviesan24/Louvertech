@@ -60,7 +60,7 @@
             <h1 align="center" class="prod_title">{{ product_name }}</h1>
 
             {% if request.user.is_authenticated %}
-            <small class="pull-right">
+            <small class="float-right">
                 [<a href="{% url 'gallery_app:edit_product' slug=instance.slug %}"><i class="fa fa-edit"></i>Edit</a>]
             </small>
             {% endif %}
