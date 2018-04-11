@@ -2,6 +2,8 @@
 {% load static %}
 {% load thumbnail %}
 
+{% block title %}{{ block.super }}{% endblock title %}
+
 {% block search_form %}
         <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search Product" aria-label="Search">
