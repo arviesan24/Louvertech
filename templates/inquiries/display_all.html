@@ -10,7 +10,8 @@
         </form>
 {% endblock search_form %}
 
-{% block page_links %}
+{% block content %}
+
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class='nav-link {% if request.session.all %}active{% endif %}' href="{% url 'contact_us_app:all_inquiries' %}">All {{ request.session.active }}</a>
@@ -22,9 +23,7 @@
         <a class='nav-link {% if request.session.read %}active{% endif %}' href="{% url 'contact_us_app:read_inquiries' %}">Read</a>
     </li>
 </ul>
-{% endblock page_links %}
 
-{% block content %}
 <label for="delete-button" onclick="return confirm('Do you really want to permanently delete the selected records?')" class="float-right btn btn-outline-danger my-3"><i class="fa fa-trash"></i> Delete Selected</label>
 <table class="table table-hover table-responsive">
     <thead class="thead-light">
