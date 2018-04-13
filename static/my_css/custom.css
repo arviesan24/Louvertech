@@ -30,6 +30,14 @@ body {
     min-height: 150px;
 }
 
+.gallery_card {
+    background: #ffffff;
+}
+
+.gallery_card:hover {
+    background: #E9ECEF;
+}
+
 /* Base HTML */
 
 .custom_div {
