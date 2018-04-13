@@ -1,13 +1,13 @@
 from django.db import models
 from django.urls import reverse
-from django.template.defaultfilters import slugify
+from .utils import unique_slug_generator
 from django.db.models.signals import pre_save
 from tinymce import HTMLField
 
 # Create your models here.
 
 class Gallery(models.Model):
-    name = models.CharField(max_length=120, unique=True)
+    name = models.CharField(max_length=120)
     description = HTMLField('Content')
     image_location = models.ImageField(upload_to='uploads/%Y/%m/%d/',
                                        null=False,
@@ -24,19 +24,8 @@ class Gallery(models.Model):
     def get_absolute_url(self):
         return reverse("gallery_app:details", kwargs={"slug": self.slug})
 
-def create_slug(instance, new_slug=None):  #to loop slug if already exists
-    slug = slugify(instance.name)
-    if new_slug is not None:
-        slug = new_slug
-    qs = Gallery.objects.filter(slug=slug).order_by("-timestamp")
-    exists = qs.exists()
-    if exists:
-        new_slug = "%s-%s" %(slug, qs.first().id)
-        return create_slug(instance, new_slug=new_slug)
-    return slug
-
 def pre_save_gallery_receiver(sender, instance, *args, **kwargs):
     if not instance.slug:
-        instance.slug = create_slug(instance)
+        instance.slug = unique_slug_generator(instance)
 
 pre_save.connect(pre_save_gallery_receiver, sender=Gallery)

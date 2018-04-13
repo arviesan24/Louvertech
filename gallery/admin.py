@@ -5,7 +5,7 @@ from .models import Gallery
 
 class GalleryAdmin(admin.ModelAdmin):
     list_display = ["name", "description", "image_location", "timestamp"]
-    list_filter = ["name", "description"]
+    list_filter = ["name"]
     search_fields = ["name", "description"]
 
     class Meta:
