@@ -196,22 +196,17 @@ def inquiry_details(request, pk):
     return render(request, 'inquiries/inquiry_details.html', {'message_body': message_body})
 
 @login_required
-def mark_as_read(request):
+def mark_as_read(request, pk):
     '''
     :param request: to change the marked_read = True
     :return: if proper session ID was selected it will update the marked_read status of the record
     '''
-    try:
-        session_message_id = request.session['id']
-        session_instance = get_object_or_404(Contact_Us, pk=session_message_id)
-        instance = Contact_Us.objects.get(id=session_message_id)
-        instance.marked_read = True
-        instance.save()
 
-    except KeyError:
-        raise Http404("Page does not exist")
+    instance = get_object_or_404(Contact_Us, pk=pk)
+    instance.marked_read = True
+    instance.save()
 
-    return render(request, 'inquiries/inquiry_details.html', {'message_body': session_instance})
+    return render(request, 'inquiries/inquiry_details.html', {'message_body': instance})
 
 
 

@@ -46,7 +46,7 @@
                 <strong>Note: </strong>This message was already read.
             </div>
         {% else %}
-            <td><a href="{% url 'contact_us_app:mark_as_read' %}" class="btn btn-outline-primary">Mark as Read</a></td>
+            <td><a href="{% url 'contact_us_app:mark_as_read' message_body.pk %}" class="btn btn-outline-primary">Mark as Read</a></td>
         {% endif %}
     </tr>
     </tbody>

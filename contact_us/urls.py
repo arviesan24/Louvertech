@@ -19,7 +19,7 @@ urlpatterns = [
     path('messages/read/', read_inquiries, name='read_inquiries'),
 
     path('messages/<int:pk>/', inquiry_details, name='inquiry_details'),
-    path('mark_as_read/', mark_as_read, name='mark_as_read'),
+    path('mark_as_read/<int:pk>/', mark_as_read, name='mark_as_read'),
 
     path('messages/delete/', delete_inquiries, name='delete_inquiries'),
 ]
