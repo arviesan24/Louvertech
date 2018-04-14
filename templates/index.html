@@ -2,6 +2,8 @@
 {% load static %}
 {% load thumbnail %}
 
+{% block title %}{{ block.super }}{% endblock title %}
+
 {% block search_form %}
         <form class="form-inline mt-2 mt-md-0">
             <input class="form-control mr-sm-2" name="q" type="text" value="{{ request.GET.q }}" placeholder="Search Product" aria-label="Search">
@@ -57,7 +59,7 @@
 <div class="row">
 {% for object in gallery_app %}
     <div class="col-lg-3 col-md-4 col-sm-6" style="padding:0px;">
-        <div class="card h-90 border-0"><!--<div class="card mt-3 mb-3 h-90">-->
+        <div class="card h-90 border-0 gallery_card"><!--<div class="card mt-3 mb-3 h-90">-->
             <h4 class="card-title text-center">{{ object.name|truncatechars:22 }}</h4>
             <div class="custom_box">
                 <!--<img src="{{ object.image_location.url }}" width="600" height="400" class="img-fluid alt="Card image">-->
@@ -78,7 +80,7 @@
 {% endfor %}
 </div>
 
-<div class="pagination justify-content-center">
+<div class="pagination justify-content-center mt-3">
     <ul class="pagination">
         {% if gallery_app.has_previous %}
         <li class="page-item"><a class="page-link" href="?page=1&q={{ request.GET.q }}">&laquo;</a></li>

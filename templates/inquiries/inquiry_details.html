@@ -1,6 +1,6 @@
 {% extends "../base.html" %}
 {% load widget_tweaks %}
-<title>{% block title %} Inquiry Details - {% endblock title %}</title>
+<title>{% block title %} Inquiry Details - {{ block.super }}{% endblock title %}</title>
 
 {% block content %}
 <table class="table table-responsive">

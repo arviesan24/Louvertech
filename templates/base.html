@@ -18,7 +18,7 @@
     <!-- Local CSS files -->
     <link rel="stylesheet" href="{% static 'my_css/custom.css' %}" />
 
-    <title>{% block title %}{% endblock title %}Louvertech</title>
+    <title>{% block title %}Louvertech{% endblock title %}</title>
 
     {% block fb_meta_tags %}
     {% endblock fb_meta_tags %}
@@ -66,10 +66,6 @@
 {% endblock gallery_banner %}
 
 <div class="custom_div container-fluid pt-3 pb-3">
-
-
-{% block page_links %}
-{% endblock page_links %}
 
 {% block content %}
 {% endblock content %}

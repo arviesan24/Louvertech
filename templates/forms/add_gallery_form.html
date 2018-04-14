@@ -1,6 +1,6 @@
 {% extends '../base.html' %}
 {% load widget_tweaks %}
-{% block title %}{% if request.session.add_product %}Add Product{% else %}Edit Product{% endif %} - {% endblock title %}
+{% block title %}{% if request.session.add_product %}Add Product{% else %}Edit Product{% endif %} - {{ block.super }}{% endblock title %}
 
 {% block form_media_header %}
 {{ form.media }}
