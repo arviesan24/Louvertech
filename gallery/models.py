@@ -15,6 +15,9 @@ class Gallery(models.Model):
     timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
     slug = models.SlugField(unique=True)
 
+    def __str__(self):  #return name instead of the object itself when calling single object from the tbl
+        return self.name
+
     #first version of slug
     # def save(self, *args, **kwargs):  #create a slug base on the product name (Dynamic--will change if name is changed)
     #     self.slug = slugify(self.name)
