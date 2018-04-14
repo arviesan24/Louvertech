@@ -11,7 +11,7 @@
 {% endblock search_form %}
 
 {% block content %}
-
+<div class="container" style="max-width: 1000px">
 <ul class="nav nav-tabs">
     <li class="nav-item">
         <a class='nav-link {% if request.session.all %}active{% endif %}' href="{% url 'contact_us_app:all_inquiries' %}">All {{ request.session.active }}</a>
@@ -79,5 +79,5 @@
     Page {{ inquiries.number }} of {{ inquiries.paginator.num_pages }}.
 </span>
 <br />
-
+</div>
 {% endblock content %}
